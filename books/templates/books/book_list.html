@@ -1,0 +1,18 @@
+{% extends 'books/base.html' %}
+
+{% block title %}Список книг{% endblock %}
+
+{% block content %}
+    <h1>Список книг</h1>
+    <a href="{% url 'book_create' %}" class="btn btn-primary mb-3">Добавить книгу</a>
+    <ul class="list-group">
+        {% for book in object_list %}
+        <li class="list-group-item">
+            <a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a>
+            ({{ book.author }})
+        </li>
+        {% empty %}
+        <li class="list-group-item">Нет доступных книг.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

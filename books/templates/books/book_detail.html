@@ -14,6 +14,7 @@
     <a href="{% url 'book_edit' object.pk %}" class="btn btn-secondary">Редактировать</a>
     <a href="{% url 'book_delete' object.pk %}" class="btn btn-danger">Удалить</a>
 
-    <!-- Ссылка на главное меню (например, список книг) -->
+    <!-- Ссылки на список книг и главную страницу -->
     <a href="{% url 'book_list' %}" class="btn btn-primary mt-3">Вернуться к списку книг</a>
+    <a href="{% url 'home' %}" class="btn btn-secondary mt-3">Главная страница</a>
 {% endblock %}

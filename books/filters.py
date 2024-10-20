@@ -7,6 +7,8 @@ class BookFilter(django_filters.FilterSet):
     published_date = django_filters.DateFilter(label='Дата публикации')
     price = django_filters.RangeFilter(label='Цена (от-до)')  # Фильтр по диапазону цены
     available = django_filters.BooleanFilter(method='filter_available', label='В наличии')
+    pages_range = django_filters.RangeFilter(field_name='pages', label='Количество страниц')
+
 
     class Meta:
         model = Book

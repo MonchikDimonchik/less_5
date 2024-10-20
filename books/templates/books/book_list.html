@@ -24,6 +24,10 @@
                 {{ filter.form.available.label_tag }}
                 {{ filter.form.available }}
             </div>
+            <div class="col-md-2">
+                {{ filter.form.pages_range.label_tag }}  <!-- Поле для диапазона страниц -->
+                {{ filter.form.pages_range }}
+            </div>
         </div>
         <button type="submit" class="btn btn-primary mt-3">Поиск</button>
         <a href="{% url 'book_list' %}" class="btn btn-secondary mt-3">Сбросить</a>
@@ -33,7 +37,7 @@
         {% for book in books %}
         <li class="list-group-item">
             <a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a>
-            ({{ book.author }}) - Цена: {{ book.price }} ₽
+            ({{ book.author }}) - {{ book.pages }} стр. - Цена: {{ book.price }} ₽
             {% if book.is_in_stock %}
             <span class="badge bg-success">В наличии</span>
             {% else %}

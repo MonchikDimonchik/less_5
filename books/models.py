@@ -10,9 +10,16 @@ class Book(models.Model):
     pages = models.IntegerField(verbose_name="Страницы")
     language = models.CharField(max_length=10, verbose_name="Язык")
     description = models.TextField(verbose_name="Описание")
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Цена")  # Добавляем поле для цены
+    storage_amount = models.IntegerField(default=0, verbose_name="Количество на складе")  # Новое поле для количества книг на складе
+
 
     def __str__(self):
         return self.title
+
+    @property
+    def is_in_stock(self):
+        return self.storage_amount > 0
 
     def get_absolute_url(self):
         return reverse('book_detail', kwargs={'pk': self.pk})

@@ -4,15 +4,44 @@
 
 {% block content %}
     <h1>Список книг</h1>
-    <a href="{% url 'book_create' %}" class="btn btn-primary mb-3">Добавить книгу</a>
-    <ul class="list-group">
-        {% for book in object_list %}
+
+    <!-- Форма фильтрации -->
+    <form method="get">
+        <div class="row">
+            <div class="col-md-2">
+                {{ filter.form.title.label_tag }}
+                {{ filter.form.title }}
+            </div>
+            <div class="col-md-2">
+                {{ filter.form.author.label_tag }}
+                {{ filter.form.author }}
+            </div>
+            <div class="col-md-2">
+                {{ filter.form.price.label_tag }}
+                {{ filter.form.price }}
+            </div>
+            <div class="col-md-2">
+                {{ filter.form.available.label_tag }}
+                {{ filter.form.available }}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Поиск</button>
+        <a href="{% url 'book_list' %}" class="btn btn-secondary mt-3">Сбросить</a>
+    </form>
+
+    <ul class="list-group mt-3">
+        {% for book in books %}
         <li class="list-group-item">
             <a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a>
-            ({{ book.author }})
+            ({{ book.author }}) - Цена: {{ book.price }} ₽
+            {% if book.is_in_stock %}
+            <span class="badge bg-success">В наличии</span>
+            {% else %}
+            <span class="badge bg-danger">Нет в наличии</span>
+            {% endif %}
         </li>
         {% empty %}
-        <li class="list-group-item">Нет доступных книг.</li>
+        <li class="list-group-item">Нет книг, соответствующих фильтру.</li>
         {% endfor %}
     </ul>
 {% endblock %}

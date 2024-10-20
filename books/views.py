@@ -2,6 +2,11 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Book
 from django.views.generic import TemplateView
+from django_filters.views import FilterView
+from .filters import BookFilter
+
+
+from books import filters
 
 
 # Представление для главной страницы
@@ -10,9 +15,11 @@ class HomePageView(TemplateView):
 
 
 # Представление списка книг
-class BookListView(ListView):
+class BookListView(FilterView):
     model = Book
+    filterset_class = BookFilter
     template_name = 'books/book_list.html'
+    context_object_name = 'books'
 
 
 # Представление деталей книги

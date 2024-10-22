@@ -20,6 +20,7 @@ class BookListView(FilterView):
     filterset_class = BookFilter
     template_name = 'books/book_list.html'
     context_object_name = 'books'
+    paginate_by = 10
 
 
 # Представление деталей книги

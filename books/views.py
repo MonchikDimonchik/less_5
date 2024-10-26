@@ -4,6 +4,9 @@ from .models import Book
 from django.views.generic import TemplateView
 from django_filters.views import FilterView
 from .filters import BookFilter
+from rest_framework import viewsets
+from .serializers import BookSerializer
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 
 from books import filters
@@ -48,3 +51,8 @@ class BookDeleteView(DeleteView):
     model = Book
     template_name = 'books/book_confirm_delete.html'
     success_url = reverse_lazy('book_list')
+
+
+class BookViewSet(viewsets.ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
